@@ -1,0 +1,90 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Artificial Data Generator</title>
+    <link href="{% static 'source_info/index.css' %}" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <!-- LOGIN FORM CREATION -->
+    <div class="background"></div>
+    <div class="container">
+        <div class="item">
+            <div class="text-item">
+                <h1 id="artificial">ARTIFICIAL DATA GENERATOR</h1>
+                <div id="time" style="position: absolute; left: 10px; bottom: 10px;"></div>
+            </div>
+        </div>
+        <!-- <h1>{{ message }}</h1> -->
+        <p style="position: absolute; left: 200px; bottom: 400px;">
+            PROD User: &emsp; &emsp;&emsp;&emsp;&nbsp; HEHEHE <br>
+            Source Database: &emsp; HEHEHE <br>
+            Source Table: &emsp; <br>
+            Target ENV: &emsp;   <br>
+            Target Database: &emsp;<br>
+            Target Table: &emsp; <br>
+        </p>
+        <!-- Terminal Box -->
+        <!-- Terminal Box -->
+        <div class="terminal-box">
+            <pre id="terminal-output">
+    > Initializing...
+            </pre>
+        </div>
+        <img src="{% static 'hourglass (2).gif' %}" alt="lele" style="height: 25%; width: auto; border-radius: 7px; position: absolute; right: 70px; bottom: 130px;">        
+
+    <div id="username">Developed by: Aryaman Pandey</div>
+    <script src="{% static 'source_info/index.js' %}"></script>
+     <!-- JavaScript for Terminal Updates -->
+    <script>
+      $(document).ready(function () {
+          // Define the backend function names in order
+          const functionsToRun = [
+              "verify_prod_login",
+              "verify_if_user_has_access_to_prod_database",
+              "verify_target_env_access",
+              "verify_if_user_has_access_to_target_ENV_database",
+              "verify_if_target_and_source_table_have_same_schema"
+          ];
+
+          function runFunction(index) {
+              if (index >= functionsToRun.length) {
+                  appendToTerminal("> All checks completed!");
+                  return;
+              }
+
+              appendToTerminal(`> Running ${functionsToRun[index]}...`);
+
+              // Send AJAX request to run the backend function
+              $.ajax({
+                  url: "{% url 'run_function' %}",
+                  type: "POST",
+                  data: {
+                      function_name: functionsToRun[index],
+                      csrfmiddlewaretoken: '{{ csrf_token }}'
+                  },
+                  success: function (response) {
+                      appendToTerminal(`> ${response.message}`);
+                      runFunction(index + 1); // Run the next function
+                  },
+                  error: function () {
+                      appendToTerminal(`> Error while running ${functionsToRun[index]}!`);
+                      runFunction(index + 1); // Continue with the next function
+                  }
+              });
+          }
+
+          function appendToTerminal(message) {
+              $("#terminal-output").append(`\n ${message}`);
+              document.getElementById('terminal-output').scrollIntoView();
+          }
+
+          // Start the verification process on page load
+          runFunction(0);
+      });
+    </script>
+</body>
+</html>
+
