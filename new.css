@@ -1,0 +1,25 @@
+<link href="//fonts.googleapis.com/css?family=Courier+New|Ubuntu+Mono|Consolas" rel="stylesheet">
+
+<style>
+    .terminal-box {
+      width: 80%; /* Adjust width as needed */
+      height: 300px; /* Adjust height as needed */
+      margin: 20px auto;
+      padding: 15px;
+      border: 2px solid #00ff00; /* Green border to mimic terminal color */
+      border-radius: 8px;
+      background-color: black; /* Terminal background */
+      color: #00ff00; /* Terminal text color */
+      font-family: 'Courier New', Courier, monospace; /* Monospace font stack */
+      font-size: 16px; /* Adjust font size */
+      overflow-y: auto; /* Scroll when content overflows */
+      white-space: pre-wrap; /* Preserve formatting and allow wrapping */
+      line-height: 1.5; /* Add spacing for readability */
+    }
+  
+    #terminal-output {
+      margin: 0;
+      padding: 0;
+    }
+  </style>
+  
