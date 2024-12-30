@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Artificial Data Generator</title>
+    <link href="{% static 'source_info/index.css' %}" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+    <!-- LOGIN FORM CREATION -->
+    <div class="background"></div>
+    <div class="container">
+        <div class="item">
+            <div class="text-item">
+                <h1 id="artificial">ARTIFICIAL DATA GENERATOR</h1>
+                <div id="time" style="position: absolute; left: 10px; bottom: 10px;"></div>
+            </div>
+        </div>
+        <!-- <h1>{{ message }}</h1> -->
+        <p style="position: absolute; left: 200px; bottom: 400px;">
+            PROD User: &emsp; &emsp;&emsp;&emsp;&nbsp; HEHEHE <br>
+            Source Database: &emsp; HEHEHE <br>
+            Source Table: &emsp; <br>
+            Target ENV: &emsp;   <br>
+            Target Database: &emsp;<br>
+            Target Table: &emsp; <br>
+        </p>
+        <!-- Terminal Box -->
+        <!-- Terminal Box -->
+        <div class="terminal-box">
+            <pre id="terminal-output">
+    > Initializing...
+            </pre>
+        </div>
+        <img src="{% static 'hourglass (2).gif' %}" alt="lele" style="height: 25%; width: auto; border-radius: 7px; position: absolute; right: 70px; bottom: 130px;">        
+
+    <div id="username">Developed by: Aryaman Pandey</div>
+    <script src="{% static 'source_info/index.js' %}"></script>
+    <!-- JavaScript for Terminal Updates -->
+    <script>
+        // function fetchLogs() {
+        //     fetch('/fetch-logs/')  // URL for your fetch_logs view
+        //         .then(response => response.json())
+        //         .then(data => {
+        //             const terminalBox = document.getElementById('terminal-box');
+        //             terminalBox.innerHTML = ''; // Clear old logs
+        //             data.logs.forEach(log => {
+        //                 const logElement = document.createElement('div');
+        //                 logElement.textContent = `${log.timestamp}: ${log.message}`;
+        //                 terminalBox.appendChild(logElement);
+        //             });
+        //         });
+        // }
+    
+        // // Fetch logs every 60 seconds
+        // setInterval(fetchLogs, 60000);
+        // fetchLogs(); // Initial load
+    //         function fetchLogs() {
+    //             fetch('/fetch-logs/')  // URL for your fetch_logs view
+    //                 .then(response => response.json())
+    //                 .then(data => {
+    //                     console.log(data);  // Log the response data to the console
+                        
+    //                     const terminalBox = document.getElementById('terminal-output');
+    //                     terminalBox.innerHTML = ''; // Clear old logs
+
+    //                     // If there are no logs
+    //                     if (!data.logs || data.logs.length === 0) {
+    //                         terminalBox.innerHTML = 'No logs available';
+    //                         return;
+    //                     }
+
+    //                     // Display each log in the terminal
+    //                     data.logs.forEach(log => {
+    //                         const logElement = document.createElement('div');
+    //                         logElement.textContent = `${log.timestamp}: ${log.message}`;
+    //                         terminalBox.appendChild(logElement);
+    //                     });
+    //                 })
+    //                 .catch(error => {
+    //                     console.error('Error fetching logs:', error);
+    //                 });
+    //         }
+
+    // // Fetch logs every 60 seconds
+    // setInterval(fetchLogs, 60000);
+    // fetchLogs(); // Initial load
+
+    function fetchLogs() {
+        fetch('/fetch-logs/')  // URL for your fetch_logs view
+            .then(response => response.json())
+            .then(data => {
+                const terminalBox = document.getElementById('terminal-output');
+                // terminalBox.innerHTML = ''; // Clear old logs
+
+                // if (!data.logs || data.logs.length === 0) {
+                //     terminalBox.innerHTML = 'No logs available';
+                // }
+
+                data.logs.forEach(log => {
+                    const logElement = document.createElement('div');
+                    // logElement.textContent = `    >${log.timestamp} : ${log.message}`;
+                    logElement.textContent = `    >${log.message}`;
+                    terminalBox.appendChild(logElement);
+                });
+            })
+            .catch(error => {
+                console.error('Error fetching logs:', error);
+            });
+    }
+
+    // Fetch logs every 60 seconds
+    setInterval(fetchLogs, 60000);
+    fetchLogs(); // Initial load
+
+    </script>
+</body>
+</html>
+
