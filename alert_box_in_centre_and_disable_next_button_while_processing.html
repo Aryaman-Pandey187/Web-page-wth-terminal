@@ -1,0 +1,106 @@
+add the below inline JS - comment out the current <script> tag content
+
+    <script>
+    window.onload = function () {
+        const invalidCredentials = "{% if invalid_credentials %}true{% else %}false{% endif %}";
+        if (invalidCredentials === "true") {
+            document.getElementById("custom-alert").style.display = "flex";
+        }
+    };
+    
+    function closeModal() {
+        document.getElementById("custom-alert").style.display = "none";
+    }
+
+    function disableButton(form) {
+    // Find the submit button within the form
+    const submitButton = form.querySelector("button[type='submit']");
+    // Disable the button
+    submitButton.disabled = true;
+    // Optionally change the button text to indicate processing
+    submitButton.textContent = "Processing...";
+    }
+    </script>
+
+
+
+add below in CSS file - 
+
+/* Modal styling */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 1000; /* Ensure it's above other elements */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    color: black;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.modal-content button:hover {
+    background-color: #0056b3;
+}
+
+
+/* Add fade-in animation */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Apply animation to the modal-content */
+.modal-content {
+    background-color: white;
+    color: black;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    width: 300px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    animation: fadeIn 0.5s ease-out; /* Fade-in animation */
+}
+
+.modal-content button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.modal-content button:hover {
+    background-color: #0056b3;
+}
+
+
